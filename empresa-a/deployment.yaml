@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empresa-a
+  namespace: empresa-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empresa-a
+  template:
+    metadata:
+      labels:
+        app: empresa-a
+    spec:
+      containers:
+        - name: empresa-a
+          image: empresa-a:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          command: ["node", "."]
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

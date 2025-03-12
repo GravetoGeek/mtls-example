@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: empresa-a
+  namespace: empresa-a
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  tls:
+  - hosts:
+    - empresa-a.local
+    # secretName: empresa-a-certs
+  rules:
+  - host: empresa-a.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: empresa-a
+            port:
+              number: 3000
